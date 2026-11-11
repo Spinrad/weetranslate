@@ -1,0 +1,6 @@
+#!/bin/sh
+# Fake tmux for tests: record display-popup arguments, then run the popup
+# command with an injected key.
+printf '%s\n' "$@" > "${WT_FAKE_TMUX_ARGS:?}"
+for last_arg in "$@"; do :; done
+printf '%s\n' "${WT_TEST_KEY:-y}" | sh -c "$last_arg"
